@@ -3,17 +3,23 @@ package com.umbertociccia.controllers;
 import java.util.List;
 
 import com.umbertociccia.models.Dogs;
+import com.umbertociccia.models.DogsCreateRequest;
 import com.umbertociccia.services.DogsService;
 
 import jakarta.inject.Inject;
+import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
+import jakarta.ws.rs.core.MediaType;
 
 @Path("/dogs")
+@Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class DogsController {
 
     @Inject
@@ -32,7 +38,7 @@ public class DogsController {
 
     @POST
     @Path("/dog")
-    public Dogs addDog(Dogs dog) {
+    public Dogs addDog(DogsCreateRequest dog) {
         return dogsService.addDog(dog);
     }
 

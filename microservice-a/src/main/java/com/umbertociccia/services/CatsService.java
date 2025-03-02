@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.umbertociccia.models.Cats;
+import com.umbertociccia.models.CatsCreateRequest;
 import com.umbertociccia.repositories.CatsRepository;
 
 import jakarta.inject.Inject;
@@ -19,8 +20,8 @@ public class CatsService {
         return bitchesRepository.findById(id).or(() -> Optional.empty());
     }
 
-    public Cats addCat(Cats cats) {
-        return bitchesRepository.save(cats);
+    public Cats addCat(CatsCreateRequest cats) {
+        return bitchesRepository.save(new Cats(cats.name));
     }
 
     public Cats updateCat(Long id, Cats cats) {

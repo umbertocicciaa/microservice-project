@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.umbertociccia.models.Dogs;
+import com.umbertociccia.models.DogsCreateRequest;
 import com.umbertociccia.repositories.DogsRepository;
 
 import jakarta.inject.Inject;
@@ -22,8 +23,8 @@ public class DogsService {
         return dogsRepository.findById(id).or(() -> Optional.empty());
     }
 
-    public Dogs addDog(Dogs dog) {
-        return dogsRepository.save(dog);
+    public Dogs addDog(DogsCreateRequest dog) {
+        return dogsRepository.save(new Dogs(dog.name));
     }
 
     public Dogs updateDog(Long id, Dogs dog) {

@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment.development';
+import { Cat } from '../models/cats';
 
 @Component({
   selector: 'app-cats',
@@ -13,7 +14,7 @@ import { environment } from '../../environments/environment.development';
 })
 export class CatsComponent implements OnInit {
   newCatName: string = '';
-  cats: { name: string }[] = [];
+  cats: Cat[] = [];
 
   constructor(private http: HttpClient) {}
 
@@ -23,7 +24,7 @@ export class CatsComponent implements OnInit {
 
   getCats() {
     this.http
-      .get<{ name: string }[]>(environment.apiUrlA + '/cats')
+      .get<Cat[]>(environment.apiUrlA + '/cats')
       .subscribe((data) => {
         this.cats = data;
       });
@@ -31,11 +32,12 @@ export class CatsComponent implements OnInit {
 
   addCat() {
     if (this.newCatName.trim()) {
-      const newCat = { name: this.newCatName };
+      const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
       this.http
-        .post<{ name: string }>(
+        .post<Cat>(
           environment.apiUrlA + '/cats/cat',
-          newCat
+          new Cat(this.newCatName),
+          { headers: headers }
         )
         .subscribe((data) => {
           this.cats.push(data);

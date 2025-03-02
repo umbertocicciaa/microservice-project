@@ -1,8 +1,9 @@
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { environment } from '../../environments/environment.development';
+import { Dog } from '../models/dogs';
 
 @Component({
   selector: 'app-dogs',
@@ -12,7 +13,7 @@ import { environment } from '../../environments/environment.development';
 })
 export class DogsComponent implements OnInit {
   newDogName: string = '';
-  dogs: { name: string }[] = [];
+  dogs: Dog [] = [];
 
   constructor(private http: HttpClient) {}
 
@@ -22,7 +23,7 @@ export class DogsComponent implements OnInit {
 
   getDogs() {
     this.http
-      .get<{ name: string }[]>(environment.apiUrlB + '/dogs')
+      .get<Dog[]>(environment.apiUrlB + '/dogs')
       .subscribe((data) => {
         this.dogs = data;
       });
@@ -30,9 +31,13 @@ export class DogsComponent implements OnInit {
 
   addDog() {
     if (this.newDogName.trim()) {
-      const newDog = { name: this.newDogName };
+      const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
       this.http
-        .post<{ name: string }>(environment.apiUrlB + '/dogs/dog', newDog)
+        .post<Dog>(
+          environment.apiUrlB + '/dogs/dog',
+          new Dog(this.newDogName),
+          { headers: headers }
+        )
         .subscribe((data) => {
           this.dogs.push(data);
           this.newDogName = '';
