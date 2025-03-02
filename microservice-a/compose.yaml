@@ -4,8 +4,8 @@ services:
     ports:
       - "8080:8080"
     depends_on:
-      - db
-  db:
+      - db-cats
+  db-cats:
     image: postgres
     restart: always
     environment:

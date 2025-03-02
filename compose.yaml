@@ -1,0 +1,42 @@
+services:
+    frontend:
+      image: angular/microservice-frontend:v1
+      ports:
+        - "80:80"
+      depends_on:
+        - microservice-a
+        - microservice-b
+    microservice-a:
+      image: quarkus/microservice-a-jvm:v1
+      ports:
+        - "8080:8080"
+      depends_on:
+        - db-cats
+    db-cats:
+      image: postgres
+      restart: always
+      environment:
+        POSTGRES_DB: cats
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: password
+      ports:
+        - 5434:5432
+      volumes:
+        - ./microservice-a/src/main/resources/init.sql:/docker-entrypoint-initdb.d/init.sql
+    microservice-b:
+      image: quarkus/microservice-b-jvm:v1
+      ports:
+        - "8081:8080"
+      depends_on:
+        - db-dogs
+    db-dogs:
+      image: postgres
+      restart: always
+      environment:
+        POSTGRES_DB: dogs
+        POSTGRES_USER: postgres
+        POSTGRES_PASSWORD: password
+      ports:
+        - 5435:5432
+      volumes:
+        - ./microservice-b/src/main/resources/init.sql:/docker-entrypoint-initdb.d/init.sql
