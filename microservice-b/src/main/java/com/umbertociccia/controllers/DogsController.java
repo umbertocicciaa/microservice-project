@@ -18,19 +18,21 @@ import jakarta.ws.rs.QueryParam;
 import jakarta.ws.rs.core.MediaType;
 
 @Path("/dogs")
-@Produces(MediaType.APPLICATION_JSON)
-@Consumes(MediaType.APPLICATION_JSON)
 public class DogsController {
 
     @Inject
     private DogsService dogsService;
 
     @GET
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public List<Dogs> getDogs() {
         return dogsService.getDogs();
     }
 
     @GET
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     @Path("/dog")
     public Dogs getDog(@QueryParam("id") Long id) {
         return dogsService.getDog(id).isPresent() ? dogsService.getDog(id).get() : null;
@@ -38,17 +40,23 @@ public class DogsController {
 
     @POST
     @Path("/dog")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Dogs addDog(DogsCreateRequest dog) {
         return dogsService.addDog(dog);
     }
 
     @PUT
     @Path("/dog")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     public Dogs updateDog(@QueryParam("id") Long id, Dogs dog) {
         return dogsService.updateDog(id, dog);
     }
 
     @DELETE
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     @Path("/dog")
     public void deleteDog(@QueryParam("id") Long id) {
         dogsService.deleteDog(id);

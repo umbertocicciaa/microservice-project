@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment.development';
 import { Cat } from '../models/cats';
+import { CatsCreateRequest } from '../models/cats-create-request';
 
 @Component({
   selector: 'app-cats',
@@ -36,7 +37,7 @@ export class CatsComponent implements OnInit {
       this.http
         .post<Cat>(
           environment.apiUrlA + '/cats/cat',
-          new Cat(this.newCatName),
+          new CatsCreateRequest(this.newCatName),
           { headers: headers }
         )
         .subscribe((data) => {

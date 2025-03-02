@@ -4,6 +4,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { environment } from '../../environments/environment.development';
 import { Dog } from '../models/dogs';
+import { DogsCreateRequest } from '../models/dogs-create-requests';
 
 @Component({
   selector: 'app-dogs',
@@ -35,7 +36,7 @@ export class DogsComponent implements OnInit {
       this.http
         .post<Dog>(
           environment.apiUrlB + '/dogs/dog',
-          new Dog(this.newDogName),
+          new DogsCreateRequest(this.newDogName),
           { headers: headers }
         )
         .subscribe((data) => {
