@@ -1,0 +1,10 @@
+<p>cats works!</p>
+<form (submit)="addCat()">
+    <label for="catName">Cat Name:</label>
+    <input type="text" id="catName" [(ngModel)]="newCatName" name="catName" required>
+    <button type="submit">Add Cat</button>
+</form>
+
+<ul>
+    <li *ngFor="let cat of cats">{{ cat.name }}</li>
+</ul>

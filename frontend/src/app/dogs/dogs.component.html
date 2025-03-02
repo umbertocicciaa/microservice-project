@@ -1,0 +1,10 @@
+<p>dogs works!</p>
+<form (submit)="addDog()">
+    <label for="dogName">Dog Name:</label>
+    <input type="text" id="dogName" [(ngModel)]="newDogName" name="dogName" required>
+    <button type="submit">Add Dog</button>
+</form>
+
+<ul>
+    <li *ngFor="let dog of dogs">{{ dog.name }}</li>
+</ul>
