@@ -1,4 +1,4 @@
-FROM node
+FROM node:slim
 
 WORKDIR /app
 
@@ -10,6 +10,6 @@ RUN npm install -g @angular/cli@latest
 
 COPY . /app 
 
-EXPOSE 4200
+EXPOSE 80
 
-CMD [ "ng", "serve", "--host", "0.0.0.0", "--poll", "2000" ]
+CMD [ "ng", "serve", "--host", "0.0.0.0", "--poll", "2000", "--port", "80" ]

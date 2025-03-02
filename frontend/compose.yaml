@@ -1,0 +1,5 @@
+services:
+  frontend:
+    image: angular/microservice-frontend:v1
+    ports:
+      - "80:80"

@@ -1,0 +1,32 @@
+# Angular build artifacts
+dist
+out-tsc
+
+# Node modules
+node_modules
+
+# IDE files
+.idea
+.vscode
+*.sublime-project
+*.sublime-workspace
+
+# Logs
+logs
+*.log
+
+# Temporary files
+tmp
+temp
+*.tmp
+*.temp
+
+# Coverage directory used by tools like istanbul
+coverage
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Compiled JavaScript
+node_modules
