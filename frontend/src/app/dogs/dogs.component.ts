@@ -32,7 +32,7 @@ export class DogsComponent implements OnInit {
     if (this.newDogName.trim()) {
       const newDog = { name: this.newDogName };
       this.http
-        .post<{ name: string }>(environment.apiUrlB + '/dogs', newDog)
+        .post<{ name: string }>(environment.apiUrlB + '/dogs/dog', newDog)
         .subscribe((data) => {
           this.dogs.push(data);
           this.newDogName = '';
