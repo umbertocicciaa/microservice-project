@@ -34,7 +34,7 @@ export class CatsComponent implements OnInit {
       const newCat = { name: this.newCatName };
       this.http
         .post<{ name: string }>(
-          environment.apiUrlA + 'https://api.example.com/cats',
+          environment.apiUrlA + '/cats',
           newCat
         )
         .subscribe((data) => {
